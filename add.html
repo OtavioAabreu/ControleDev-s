@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <audio src="music/darth_vader.mp3" id="one"></audio>
+    <audio src="music/xp_minecraft.mp3" id="two"></audio>
+    <audio src="music/elevator-music.mp3" id="three"></audio>
+
+    <header>
+        <h2>Dev's Transit</h2>
+        <button>Sing in</button>
+    </header>
+    <main>
+        <div class="algo">Status:</div>
+        <div class="conj">
+            <h2 id="play"></h2> 
+            <div id="into"></div>
+        </div>
+    </main>
+    <footer>Produced by Pedro Otávio</footer>
+</body>
+<script>
+    let sound1 = document.getElementById('one');
+    let sound2 = document.getElementById('two');
+    let sound3 = document.getElementById('three');
+
+    let play = document.getElementById("play");
+    let into = document.getElementById("into");
+
+fetch("https://niloweb.com.br/transit-room/api/reg_endpoint.php")
+    .then(resposta => resposta.json()
+        .then(dados1 => {
+            if (dados1[0].res == "B") {
+                let caminhoDaImagemLocal = "images/Parepolice.png";
+
+                let imagem = document.createElement("img");
+                imagem.src = caminhoDaImagemLocal;
+                imagem.alt = "poliça1";
+
+                play.innerHTML = `Bloqueado`;
+                into.innerHTML = '';
+                into.appendChild(imagem);
+
+                sound1.paly()
+
+            } else if (dados1[0].res == "L") {
+                let caminhoDaImagemLocal = "images/Prossigapolice.png";
+
+                let imagem = document.createElement("img");
+                imagem.src = caminhoDaImagemLocal;
+                imagem.alt = "poliça2";
+
+                play.innerHTML = `Sem fila`;
+                into.innerHTML = '';
+                into.appendChild(imagem);
+
+                sound2.play()
+
+            } else {
+                let caminhoDaImagemLocal = "images/Aguardepolice.png";
+
+                let imagem = document.createElement("img");
+                imagem.src = caminhoDaImagemLocal;
+                imagem.alt = "poliça3";
+
+                play.innerHTML = `Aguardando`;
+                into.innerHTML = '';
+                into.appendChild(imagem);
+
+                sound3.play();
+
+            }
+        })
+    );
+
+
+    setInterval(function() {
+      location.reload();
+    }, 100000);
+</script>
+    
+    
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300,400,500,600,700,800,900&display=swap');
+    body{
+        background-image: linear-gradient(to right, rgb(53, 69, 164) 10%, rgb(55, 142, 255));
+    }
+    header{
+        width: 100%;
+        height: 65px;
+        background-color:rgb(80, 80, 186);
+        background-image: linear-gradient(to right, midnightblue -5%, rgb(73, 92, 197));
+        padding: 1px;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    header h2{
+        font-family: "Titan One", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        color:orange;
+        -webkit-text-stroke: white 1px;
+        margin-left: 10px;
+    }
+    header button {
+        height: 35px;
+        width: 80px;
+        margin-left: 115px;
+        background-color: cornflowerblue;
+        border: none;
+        color: white;
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+    }
+    .algo{
+        position: absolute;
+           left: 30px;
+           top: 110px;
+           color: white;
+           font-family: "Titan One", sans-serif;
+           font-weight: 400;
+           font-style: normal;
+           text-shadow: black 1px 1.5px 1px;
+           font-size: 20px;
+    }
+    main{
+        width: 100%;
+        height: auto;
+    }
+    .conj{
+        width: 90%;
+        height: 20%;
+        text-align: center;
+        margin-top: 60%;
+    }
+  
+        .conj h2{
+        transform: translate(-50%, -50%);
+        border-bottom: .7vw solid;
+        overflow: hidden;
+        animation: anim 2.5s linear forwards;
+        margin-left: 170px;
+    }
+    @keyframes anim {
+        0%{
+            width: 0;
+            height: 0;
+        }
+        30%{
+            width: 50%;
+            height: 0;
+        }
+        60%{
+            width: 59vw;
+            height: 12vw;
+        }
+        80%{
+            width: 59vw;
+            height: 12vw;
+        }
+        100%{
+            width: 59vw;
+            height: 12vw;
+        }
+    }
+
+    #play{
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        color: white;
+        font-family: "Kanit", sans-serif;
+        font-weight: 100;
+        font-style: normal;
+    }
+    #into{
+        width: 250px;
+        height: 250px;
+        margin-left: 45px;
+        margin-top: 40px;
+    }
+    #into img{
+        max-width: 100%;
+        max-height: 100%;
+    }
+    footer{
+        width: 100%;
+        height: auto;
+        background-color:rgb(80, 80, 186);
+        background-image: linear-gradient(to right, midnightblue -5%, rgb(73, 92, 197));
+        position: absolute;
+        bottom: 0px;
+        left: 0 ;
+        color: white;
+        font-size: 13px;
+    }
+    
+    @media (min-width: 1080px){
+        header button{
+            position: relative;
+            left: 74%;
+        }
+        .algo{
+           position: absolute;
+           left: 250px;
+           top: 120px;
+           color: white;
+           font-family: "Titan One", sans-serif;
+           font-weight: 400;
+           font-style: normal;
+           text-shadow: black 1px 1.5px 1px;
+           font-size: 20px;
+        }
+        .conj{
+        margin-top: 170px;
+        } 
+        .conj h2{
+            max-width: 300px;
+            max-height: 70px;
+            margin-top: 5.5%;
+        }
+        .conj h2{
+        transform: translate(-50%, -50%);
+        border-bottom: .3svw solid;
+        overflow: hidden;
+        animation: anim 3.5s linear forwards;
+        margin-left: 50%;
+    }
+        @keyframes anim {
+        0%{
+            width: 0;
+            height: 0;
+        }
+        30%{
+            width: 20%;
+            height: 0;
+        }
+        60%{
+            width: 59vw;
+            height: 12vw;
+        }
+        80%{
+            width: 59vw;
+            height: 12vw;
+        }
+        100%{
+            width: 59vw;
+            height: 12vw;
+        }
+    }
+        #into{
+            margin-top: 45px;
+            position: relative;
+            left: 38%;
+        }
+        main{
+        display: flex;
+        justify-content: center;
+        }
+    }
+</style>
+</html>
